@@ -64,13 +64,13 @@ namespace Microsoft.Net.Http.Headers
 
         public string Name
         {
-            get { return GetName(NameString); }
+            get { return Unquote(GetName(NameString)); }
             set { SetName(NameString, value); }
         }
 
         public string FileName
         {
-            get { return GetName(FileNameString); }
+            get { return Unquote(GetName(FileNameString)); }
             set { SetName(FileNameString, value); }
         }
 
@@ -460,6 +460,16 @@ namespace Microsoft.Net.Http.Headers
 
             return value.Length > 1 && value.StartsWith("\"", StringComparison.Ordinal)
                 && value.EndsWith("\"", StringComparison.Ordinal);
+        }
+
+        /// <summary>
+        /// Unquotes string if it is not null. Does nothing if the string is null.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        private string Unquote(string value)
+        {
+            return value == null ? value : value.Trim('"');
         }
 
         // tspecials are required to be in a quoted string.  Only non-ascii needs to be encoded.

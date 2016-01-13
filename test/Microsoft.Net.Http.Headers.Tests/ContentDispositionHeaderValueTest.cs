@@ -152,7 +152,7 @@ namespace Microsoft.Net.Http.Headers
             Assert.Equal(1, contentDisposition.Parameters.Count);
             Assert.Equal("FILENAME", contentDisposition.Parameters.First().Name);
             Assert.Equal("\"=?utf-99?Q?R=mlsZcODTmFtZS5iYXQ=?=\"", contentDisposition.Parameters.First().Value);
-            Assert.Equal("\"=?utf-99?Q?R=mlsZcODTmFtZS5iYXQ=?=\"", contentDisposition.FileName);
+            Assert.Equal("=?utf-99?Q?R=mlsZcODTmFtZS5iYXQ=?=", contentDisposition.FileName);
 
             contentDisposition.FileName = "new_name";
             Assert.Equal("new_name", contentDisposition.FileName);
