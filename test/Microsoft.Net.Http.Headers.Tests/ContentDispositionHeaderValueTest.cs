@@ -418,6 +418,34 @@ namespace Microsoft.Net.Http.Headers
         }
 
         [Fact]
+        public void Parse_FileNameWithoutQuotes()
+        {
+            //  arrange
+            string contentDisposition = $"form-data; name=\"avatar\"; filename=\"my-face.png\"";
+            string expected = "my-face.png";
+
+            //  act
+            var parsed = ContentDispositionHeaderValue.Parse(contentDisposition);
+
+            //  assert
+            Assert.Equal(expected, parsed.FileName);
+        }
+
+        [Fact]
+        public void Parse_NameWithoutQuotes()
+        {
+            //  arrange
+            string contentDisposition = $"form-data; name=\"avatar\"; filename=\"my-face.png\"";
+            string expected = "avatar";
+
+            //  act
+            var parsed = ContentDispositionHeaderValue.Parse(contentDisposition);
+
+            //  assert
+            Assert.Equal(expected, parsed.Name);
+        }
+
+        [Fact]
         public void Parse_SetOfInvalidValueStrings_Throws()
         {
             CheckInvalidParse("");
